@@ -46,15 +46,15 @@ export function ThemeToggle() {
         </motion.div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-44">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onSelect={() => setTheme("light")}>
           <Sun className="mr-2 h-4 w-4" />
           {t("themeLight")}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onSelect={() => setTheme("dark")}>
           <Moon className="mr-2 h-4 w-4" />
           {t("themeDark")}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onSelect={() => setTheme("system")}>
           <Monitor className="mr-2 h-4 w-4" />
           {t("themeSystem")}
         </DropdownMenuItem>
