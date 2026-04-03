@@ -1,4 +1,4 @@
-c"use client";
+"use client";
 
 import {
   Area,
