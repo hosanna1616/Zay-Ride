@@ -19,15 +19,6 @@ function envAltPassword(): string {
   return process.env.NEXT_PUBLIC_MOCK_ALT_PASSWORD ?? "zayride";
 }
 
-/** Shown in login UI hint — not a secret in mock mode. */
-export function getMockPrimaryEmail(): string {
-  return envPrimaryEmail();
-}
-
-export function getMockPrimaryPassword(): string {
-  return envPrimaryPassword();
-}
-
 export function validateMockCredentials(email: string, password: string): boolean {
   const e = email.trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return false;

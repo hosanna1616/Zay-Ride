@@ -7,10 +7,6 @@ import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/stores/use-auth-store";
-import {
-  getMockPrimaryEmail,
-  getMockPrimaryPassword,
-} from "@/lib/mock-auth";
 import { cn } from "@/lib/utils";
 
 type TraderLoginPanelProps = {
@@ -89,7 +85,7 @@ export function TraderLoginPanel({
                 id="landing-login-email"
                 type="email"
                 autoComplete="email"
-                placeholder={getMockPrimaryEmail()}
+                placeholder={t("emailPlaceholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={cn(
@@ -106,7 +102,7 @@ export function TraderLoginPanel({
                 id="landing-login-pass"
                 type="password"
                 autoComplete="current-password"
-                placeholder={getMockPrimaryPassword()}
+                placeholder={t("passwordPlaceholder")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={cn(
