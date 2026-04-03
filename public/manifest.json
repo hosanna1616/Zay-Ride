@@ -1,0 +1,24 @@
+{
+  "name": "ZayRide Trader",
+  "short_name": "ZayRide",
+  "description": "Sales, debts, profit & ZayRide delivery for Ethiopian traders",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Zayride%20logo%20design.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/zayride-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
