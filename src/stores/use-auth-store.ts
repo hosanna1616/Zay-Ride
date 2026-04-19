@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { validateMockCredentials } from "@/lib/mock-auth";
+import { GUEST_DEMO_EMAIL, validateMockCredentials } from "@/lib/mock-auth";
 
 /**
  * Session gate for the trader shell. Swap for real auth + httpOnly cookies / tokens.
@@ -8,7 +8,10 @@ import { validateMockCredentials } from "@/lib/mock-auth";
 interface AuthState {
   isAuthenticated: boolean;
   email: string | null;
+  /** True when the user entered via "Try demo" — no credentials, same UI as signed-in trader. */
+  isGuest: boolean;
   login: (email: string, password: string) => boolean;
+  loginGuest: () => void;
   logout: () => void;
 }
 
@@ -17,15 +20,22 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       isAuthenticated: false,
       email: null,
+      isGuest: false,
       login: (email, password) => {
         if (!validateMockCredentials(email, password)) {
-          set({ isAuthenticated: false, email: null });
+          set({ isAuthenticated: false, email: null, isGuest: false });
           return false;
         }
-        set({ isAuthenticated: true, email: email.trim() });
+        set({ isAuthenticated: true, email: email.trim(), isGuest: false });
         return true;
       },
-      logout: () => set({ isAuthenticated: false, email: null }),
+      loginGuest: () =>
+        set({
+          isAuthenticated: true,
+          email: GUEST_DEMO_EMAIL,
+          isGuest: true,
+        }),
+      logout: () => set({ isAuthenticated: false, email: null, isGuest: false }),
     }),
     {
       name: "zayride-auth",
@@ -33,6 +43,7 @@ export const useAuthStore = create<AuthState>()(
       partialize: (s) => ({
         isAuthenticated: s.isAuthenticated,
         email: s.email,
+        isGuest: s.isGuest,
       }),
     }
   )

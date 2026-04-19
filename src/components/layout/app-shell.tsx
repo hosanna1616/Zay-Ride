@@ -16,6 +16,7 @@ import { LanguageToggle } from "@/components/shared/language-toggle";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { useAuthStore } from "@/stores/use-auth-store";
 import { useSettingsStore } from "@/stores/use-settings-store";
 import { Badge } from "@/components/ui/badge";
 import { ZayRideLogo } from "@/components/brand/zayride-logo";
@@ -33,6 +34,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation();
   const partnerView = useSettingsStore((s) => s.partnerView);
   const setPartnerView = useSettingsStore((s) => s.setPartnerView);
+  const isGuest = useAuthStore((s) => s.isGuest);
 
   return (
     <div className="flex min-h-dvh flex-col bg-gradient-to-b from-zinc-50 via-white to-emerald-50/30 dark:from-zinc-950 dark:via-zinc-900 dark:to-emerald-950/20">
@@ -45,6 +47,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <span className="hidden sm:block">
               <ZayRideLogo variant="wordmark" priority />
             </span>
+            {isGuest && (
+              <Badge variant="secondary" className="hidden shrink-0 text-[10px] sm:inline-flex">
+                {t("guestBadge")}
+              </Badge>
+            )}
             {partnerView && (
               <Badge variant="delivery" className="hidden shrink-0 text-[10px] sm:inline-flex">
                 Partner

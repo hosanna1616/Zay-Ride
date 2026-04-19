@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, FlaskConical, Sparkles } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/stores/use-auth-store";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +23,7 @@ export function TraderLoginPanel({
 }: TraderLoginPanelProps) {
   const { t } = useTranslation();
   const login = useAuthStore((s) => s.login);
+  const loginGuest = useAuthStore((s) => s.loginGuest);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -119,6 +121,24 @@ export function TraderLoginPanel({
                 {t("signInError")}
               </p>
             )}
+
+            <div className="space-y-2 rounded-2xl border border-dashed border-zinc-200 bg-zinc-50/80 p-4 dark:border-zinc-600 dark:bg-zinc-800/40">
+              <p className="text-center text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                {t("tryDemoHint")}
+              </p>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full gap-2 rounded-xl border-emerald-500/40 bg-white/90 font-semibold text-emerald-800 hover:bg-emerald-50 dark:border-emerald-500/30 dark:bg-zinc-900/80 dark:text-emerald-200 dark:hover:bg-emerald-950/50"
+                onClick={() => {
+                  loginGuest();
+                  onSignedIn();
+                }}
+              >
+                <FlaskConical className="h-4 w-4 shrink-0" aria-hidden />
+                {t("tryDemoCta")}
+              </Button>
+            </div>
 
             <motion.button
               type="submit"

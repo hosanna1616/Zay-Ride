@@ -3,6 +3,9 @@
  * Credentials default from `.env.local` (see `.env.example`); fallbacks keep demo working without a file.
  */
 
+/** Shown for guest/demo sessions only — not a secret; no password is used for this path. */
+export const GUEST_DEMO_EMAIL = "guest@demo.zayride.et";
+
 function envPrimaryEmail(): string {
   return process.env.NEXT_PUBLIC_MOCK_TRADER_EMAIL ?? "trader@zayride.et";
 }
